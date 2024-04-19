@@ -11,18 +11,20 @@ import {
 
 const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Navigate replace to="/feedbacks" />} />
-          <Route path="/feedbacks" element={<Feedbacks />} />
-          <Route path="/feedback-detail" element={<FeedbackDetail />} />
-          <Route path="/new-feedback" element={<NewFeedback />} />
-          <Route path="/edit-feedback" element={<EditFeedback />} />
-          <Route path="/roadmap" element={<Roadmap />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <div className="bg-[#F7F8FD]">
+      <div className="lg:max-w-[960px] lg:py-12 lg:mx-auto min-h-screen">
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Navigate replace to="/feedbacks" />} />
+            <Route path="/feedbacks" element={<Feedbacks />} />
+            <Route path="/feedback-detail" element={<FeedbackDetail />} />
+            <Route path="/new-feedback" element={<NewFeedback />} />
+            <Route path="/edit-feedback" element={<EditFeedback />} />
+            <Route path="/roadmap" element={<Roadmap />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   );
 };
 
