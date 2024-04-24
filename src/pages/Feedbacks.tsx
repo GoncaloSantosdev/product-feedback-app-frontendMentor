@@ -11,11 +11,11 @@ const Feedbacks = () => {
       </div>
       <div className="w-9/12">
         <Header />
-        <main className="mt-6 space-y-6">
+        <div className="mt-6 space-y-6">
           {feedbacksData.map((feedback) => (
             <FeedbackCard feedback={feedback} key={feedback.id} />
           ))}
-        </main>
+        </div>
       </div>
     </div>
   );

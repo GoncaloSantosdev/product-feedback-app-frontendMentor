@@ -17,9 +17,9 @@ const App = () => {
           <Routes>
             <Route index element={<Navigate replace to="/feedbacks" />} />
             <Route path="/feedbacks" element={<Feedbacks />} />
-            <Route path="/feedback-detail" element={<FeedbackDetail />} />
+            <Route path="/feedback-detail/:id" element={<FeedbackDetail />} />
             <Route path="/new-feedback" element={<NewFeedback />} />
-            <Route path="/edit-feedback" element={<EditFeedback />} />
+            <Route path="/edit-feedback/:id" element={<EditFeedback />} />
             <Route path="/roadmap" element={<Roadmap />} />
           </Routes>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 // Components
-import { Button } from "./";
+import { Link } from "react-router-dom";
 // React icons
 import { IoBulbOutline } from "react-icons/io5";
 
@@ -13,9 +13,12 @@ const Header = () => {
         <div className="ml-6">Sort by: Most Upvotes</div>
       </div>
       <div>
-        <Button primary onClick={() => {}}>
+        <Link
+          to={"/new-feedback"}
+          className="text-white rounded-lg text-sm px-6 py-3 font-bold bg-[#AD1FEA]"
+        >
           + Add Feedback
-        </Button>
+        </Link>
       </div>
     </header>
   );

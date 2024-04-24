@@ -1,3 +1,5 @@
+// React router
+import { Link } from "react-router-dom";
 // Types
 import { FeedbackType } from "../../types";
 // React Icons
@@ -19,7 +21,9 @@ const FeedbackCard: React.FC<FeedbackProps> = ({ feedback }) => {
           <span className="text-[#3A4374] font-semibold text-sm">{votes}</span>
         </div>
         <div>
-          <h2 className="text-[#3A4374] font-bold">{title}</h2>
+          <Link to={"/feedback-detail/1"}>
+            <h2 className="text-[#3A4374] font-bold">{title}</h2>
+          </Link>
           <p className="text-[#647196] text-sm mt-2">{description}</p>
           <div className="mt-4">
             <span className="bg-[#F2F4FF] text-[#4661E6] font-semibold text-sm px-4 py-2 rounded">
