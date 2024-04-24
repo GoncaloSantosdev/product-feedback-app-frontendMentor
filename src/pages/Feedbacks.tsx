@@ -1,9 +1,17 @@
+// React Query
+import { useQuery } from "@tanstack/react-query";
 // Components
 import { FeedbackCard, Header, Sidebar } from "../components";
 // Data
-import { feedbacksData } from "../data/feedbacksData";
+import { getFeedbacks } from "../services/apiFeedbacks";
 
 const Feedbacks = () => {
+  // fetch feedbacks from db
+  const { data, isFetching } = useQuery({
+    queryKey: ["feedbacks"],
+    queryFn: getFeedbacks,
+  });
+
   return (
     <div className="flex gap-x-6">
       <div className="w-1/4">
@@ -12,9 +20,15 @@ const Feedbacks = () => {
       <div className="w-9/12">
         <Header />
         <div className="mt-6 space-y-6">
-          {feedbacksData.map((feedback) => (
-            <FeedbackCard feedback={feedback} key={feedback.id} />
-          ))}
+          {isFetching ? (
+            <h1>Loading...</h1>
+          ) : (
+            <>
+              {data?.map((feedback) => (
+                <FeedbackCard feedback={feedback} key={feedback.id} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>
