@@ -7,10 +7,12 @@ import { getFeedbacks } from "../services/apiFeedbacks";
 
 const Feedbacks = () => {
   // fetch feedbacks from db
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["feedbacks"],
     queryFn: getFeedbacks,
   });
+
+  if (error) return <h1>Failed fetching feedbacks</h1>;
 
   return (
     <div className="flex gap-x-6">

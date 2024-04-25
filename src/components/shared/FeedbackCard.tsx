@@ -11,7 +11,7 @@ type FeedbackProps = {
 };
 
 const FeedbackCard: React.FC<FeedbackProps> = ({ feedback }) => {
-  const { title, description, category, votes, comments } = feedback;
+  const { id, title, description, category, votes, comments } = feedback;
 
   return (
     <div className="bg-white rounded-lg flex items-center justify-between p-6">
@@ -21,7 +21,7 @@ const FeedbackCard: React.FC<FeedbackProps> = ({ feedback }) => {
           <span className="text-[#3A4374] font-semibold text-sm">{votes}</span>
         </div>
         <div>
-          <Link to={"/feedback-detail/1"}>
+          <Link to={`/feedback-detail/${id}`}>
             <h2 className="text-[#3A4374] font-bold">{title}</h2>
           </Link>
           <p className="text-[#647196] text-sm mt-2">{description}</p>
