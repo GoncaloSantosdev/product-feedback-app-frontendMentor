@@ -1,10 +1,42 @@
 // React Router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+// React Query
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+// React Hook Form
+import { useForm } from "react-hook-form";
+// API
+import { createFeedback } from "../services/apiFeedbacks";
+// Components
+import { Button } from "../components";
 // React Icons
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { Button } from "../components";
+
+interface FormData {
+  title: string;
+  category: string;
+  description: string;
+}
 
 const NewFeedback = () => {
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
+  // Access the client
+  const queryClient = useQueryClient();
+
+  // Create feedback
+  const { mutate } = useMutation({
+    mutationFn: createFeedback,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["feedbacks"] });
+      navigate("/feedbacks");
+    },
+  });
+
+  const onSubmit = (data: FormData) => {
+    mutate(data);
+  };
+
   return (
     <div className="max-w-lg mx-auto">
       <div>
@@ -27,7 +59,7 @@ const NewFeedback = () => {
           Create New Feedback
         </h3>
 
-        <form className="mt-4 space-y-6">
+        <form className="mt-4 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="text-[#3A4374] font-semibold mb-2">
               Feedback Title
@@ -36,10 +68,13 @@ const NewFeedback = () => {
               Add a short, descriptive headline
             </p>
             <input
-              className="bg-[#F7F8FD] w-full p-3 rounded-lg mt-2"
+              {...register("title")}
               type="text"
+              required
+              className="bg-[#F7F8FD] w-full p-3 rounded-lg mt-2"
             />
           </div>
+
           <div>
             <label className="text-[#3A4374] font-semibold mb-2">
               Category
@@ -47,11 +82,20 @@ const NewFeedback = () => {
             <p className="text-[#647196] text-sm mt-1">
               Choose a category for your feedback
             </p>
-            <input
-              className="bg-[#F7F8FD] w-full p-3 rounded-lg mt-2"
-              type="text"
-            />
+            <select
+              {...register("category")}
+              required
+              className="bg-[#F7F8FD] w-full p-3 rounded-lg mt-2 "
+            >
+              <option value="all">All</option>
+              <option value="ui">UI</option>
+              <option value="ux">UX</option>
+              <option value="enhancement">Enhancement</option>
+              <option value="bug">Bug</option>
+              <option value="feature">Feature</option>
+            </select>
           </div>
+
           <div>
             <label className="text-[#3A4374] font-semibold mb-2">
               Feedback Detail
@@ -60,7 +104,11 @@ const NewFeedback = () => {
               Include any specific comments on what should be improved, added,
               etc.
             </p>
-            <textarea className="bg-[#F7F8FD] w-full p-3 rounded-lg mt-2" />
+            <textarea
+              {...register("description")}
+              required
+              className="bg-[#F7F8FD] w-full p-3 rounded-lg mt-2 text-sm h-[120px]"
+            />
           </div>
 
           <div className="flex justify-end gap-4">

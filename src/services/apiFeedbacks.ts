@@ -1,4 +1,6 @@
 import supabase from "../utils/supabase";
+// Types
+import { FeedbackType } from "../types";
 
 export const getFeedbacks = async () => {
   const { data, error } = await supabase.from("feedbacks").select("*");
@@ -20,6 +22,20 @@ export const getFeedback = async (feedbackId: number) => {
   if (error) {
     console.error(error);
     throw new Error("Feedback could not be loaded");
+  }
+
+  return data;
+};
+
+export const createFeedback = async (feedbackData: FeedbackType) => {
+  const { data, error } = await supabase
+    .from("feedbacks")
+    .insert([feedbackData])
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Feedback could not be created");
   }
 
   return data;
